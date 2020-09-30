@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace BCL\Service\AddressCleaner;
+namespace Viszman\Service\AddressCleaner;
 
 
 class BasicCleaner implements Cleaner

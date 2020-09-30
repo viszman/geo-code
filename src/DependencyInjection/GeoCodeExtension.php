@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace BCL\DependencyInjection;
+namespace Viszman\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

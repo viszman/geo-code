@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BCL\Service;
+namespace Viszman\Service;
 
 
-use BCL\Service\AddressCleaner\Cleaner;
 use Geocoder\Collection;
 use Geocoder\Exception\Exception;
 use Geocoder\Model\Address;
@@ -15,24 +14,25 @@ use Geocoder\Provider\Nominatim\Model\NominatimAddress;
 use Geocoder\Provider\Provider;
 use Geocoder\Query\GeocodeQuery;
 use Geocoder\Query\ReverseQuery;
+use Viszman\Service\AddressCleaner\Cleaner;
 
-    class NominatimGeocode
+class NominatimGeocode
+{
+    /**
+     * @var \Geocoder\Provider\Provider
+     */
+    private $nominatimProvider;
+    private $checkPostCode = false;
+
+    /**
+     * Geo Nominatim constructor.
+     *
+     * @param \Geocoder\Provider\Provider $nominatimProvider
+     */
+    public function __construct(Provider $nominatimProvider)
     {
-        /**
-         * @var \Geocoder\Provider\Provider
-         */
-        private $nominatimProvider;
-        private $checkPostCode = false;
-
-        /**
-         * Geo Nominatim constructor.
-         *
-         * @param \Geocoder\Provider\Provider $nominatimProvider
-         */
-        public function __construct(Provider $nominatimProvider)
-        {
-            $this->nominatimProvider = $nominatimProvider;
-        }
+        $this->nominatimProvider = $nominatimProvider;
+    }
 
     public function search(string $address, ?string $postCode, Cleaner $cleaner): ?NominatimAddress
     {

@@ -1,6 +1,6 @@
 {
   "type": "project",
-  "name": "bcl/geo-code",
+  "name": "viszman/geo-code",
   "keywords": [
     "PHP",
     "Nominatim",
@@ -32,12 +32,12 @@
   },
   "autoload": {
     "psr-4": {
-      "BCL\\": "src/"
+      "Viszman\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "BCL\\Tests\\": "tests/"
+      "Viszman\\Tests\\": "tests/"
     }
   },
   "scripts": {
