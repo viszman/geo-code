@@ -1,0 +1,43 @@
+# Select image from https://hub.docker.com/r/_/php/
+#image: php:7.0
+
+## Services
+#services:
+#    - mysql:latest
+
+# Variables and root user used
+
+# Before Script
+before_script:
+    #    - bash .gitlab-ci.sh > /dev/null
+    #    - cd /builds/zeedenis/ZeeApi
+#    - php -i
+    - pwd
+    - whoami
+    - php composer.phar install
+    #    - cp app/config/parameters.gitlab-ci.yml app/config/parameters.yml
+    #    - curl -sS https://getcomposer.org/installer | php
+    #    - php composer.phar install
+    #    - php app/console doctrine:database:create --env=test --if-not-exists
+    #    - php app/console doctrine:schema:create --env=test
+    #    - ping -c 3 mysql
+
+#dev:app:
+#    only:
+#        - master
+#    tags:
+#        - prod
+#    script:
+#        - php -i
+
+dev:bcl-de:
+    stage: deploy
+    only:
+        - master
+    tags:
+        - prod
+    environment:
+        name: bcl-de-stage
+        url: http://172.16.0.41
+    script:
+        - 'curl --header "Job-Token: $CI_JOB_TOKEN" --data tag=<tag> "https://172.16.0.9m/api/v4/projects/$CI_PROJECT_ID/packages/composer"'

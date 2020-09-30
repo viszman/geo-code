@@ -1,0 +1,11 @@
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            Geocoder\Provider\Provider $nominatimProvider: '@bazinga_geocoder.provider.nominatim'
+            Geocoder\Provider\Provider $googleProvider: '@bazinga_geocoder.provider.google'
+
+    BCL\Service\NominatimGeocode:
+        arguments: [ '@bazinga_geocoder.provider.nominatim']
