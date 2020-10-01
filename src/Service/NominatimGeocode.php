@@ -599,9 +599,13 @@ class NominatimGeocode
         $allPermutations = array_filter(array_unique($keys));
         foreach ($allPermutations as $uniqueCombination) {
             $keysToCombine = explode(',', $uniqueCombination);
+            $keysToCombine = array_filter($keysToCombine);
             $partial = [];
             foreach ($keysToCombine as $item) {
-                $partial[] = $addressParts[$item];
+                try {
+                    $partial[] = $addressParts[$item];
+                } catch (\Throwable $e) {
+                }
             }
             $addresses[] = implode(', ', $partial);
         }
