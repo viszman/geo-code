@@ -195,7 +195,7 @@ class NominatimGeocode
         $parts = explode(' ', $loweredStreet);
 
         foreach ($parts as $part) {
-            if (strpos($address, $part) !== false) {
+            if ($address && $part && strpos($address, $part) !== false) {
                 $candidate['fieldsMatch']++;
             }
         }
