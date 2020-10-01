@@ -511,7 +511,8 @@ class NominatimGeocode
 
             foreach (explode(',', $addressNominatim->getDisplayName()) as $displayParts) {
                 $partLowered = strtolower(trim($displayParts));
-                if (strpos($loweredAddress, $partLowered) !== false) {
+                if ($loweredAddress && $partLowered
+                    && strpos($loweredAddress, $partLowered) !== false) {
                     $tmpCandidate['fieldsMatch']++;
                 }
             }
