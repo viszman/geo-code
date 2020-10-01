@@ -483,7 +483,7 @@ class NominatimGeocode
 //            }
 
 
-            if (in_array(
+            if ($addressNominatim->getCountry() && in_array(
                     $addressNominatim->getCountry()->getCode(),
                     $explodedAddress,
                     true
