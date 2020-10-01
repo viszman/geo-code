@@ -235,6 +235,9 @@ class NominatimGeocode
 
     private function getGeoResult(string $address, Provider $provider): ?Collection
     {
+        if (!$address) {
+            return null;
+        }
         $geoResults = $this->callProvider(GeocodeQuery::create($address), $provider);
         if ($geoResults === null) {
             return null;
