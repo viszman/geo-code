@@ -89,6 +89,9 @@ class NominatimGeocode
         $countNumber = count($addresses);
         echo "\n will make ".$countNumber;
         foreach ($addresses as $key => $addressPermutation) {
+            if (!$addressPermutation) {
+                continue;
+            }
             $geoQuery = GeocodeQuery::create($addressPermutation);
             $geoQueryEN = $geoQuery->withLocale('en_EN');
             $geoResultNormal = $this->getGeo($geoQuery, $this->nominatimProvider);
