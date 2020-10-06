@@ -585,6 +585,8 @@ class NominatimGeocode
     private function permute(string $address)
     {
         $addressParts = explode(',', $address);
+        $addressParts = array_unique($addressParts);
+        $addressParts = array_slice($addressParts, 0, 7);
         $maxCount = count($addressParts);
         if (1 === $maxCount) {
             return $addressParts;
