@@ -197,10 +197,31 @@ class NominatimGeocode
         $loweredStreet = strtolower($partAddress);
         $parts = explode(' ', $loweredStreet);
 
+        $partAddressNumbers = is_numeric($partAddress);
+
         foreach ($parts as $part) {
             if ($address && $part && strpos($address, $part) !== false) {
                 $candidate['fieldsMatch']++;
             }
+
+            if ($partAddressNumbers && is_numeric($part)) {
+                $numbers = (int)$part;
+                $numbersPart = (int)$partAddress;
+                [$bigger, $smaller] = $this->getBigger($numbers, $numbersPart);
+                $maybeGoodPostCode = ($smaller / $bigger * 100) >= 30;
+                $candidate['fieldsMatch']++;
+            }
+        }
+    }
+
+    private function getBigger(int $firstNumber, int $secondNumber): ?array
+    {
+        switch ($firstNumber <=> $secondNumber) {
+            case 0:
+            case 1:
+                return [$firstNumber, $secondNumber];
+            case -1:
+                return [$secondNumber, $firstNumber];
         }
     }
 
